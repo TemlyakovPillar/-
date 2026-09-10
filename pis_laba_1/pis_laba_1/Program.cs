@@ -1,4 +1,4 @@
-﻿
+﻿using System.IO;
 namespace pis_laba_1
 {
     internal class Program
@@ -8,17 +8,24 @@ namespace pis_laba_1
             bool pz = true;
             while (pz)
             {
-                Console.WriteLine("Создать файл (Y - Да; Z - Нет)");
+                Console.WriteLine("Прочитать файл (Y - Да; Z - Нет)");
                 string z = Console.ReadLine();
                 if (z == "Z") return;
-                Console.WriteLine("Введите имя файла: ");
-                string name = Console.ReadLine();
-                Console.WriteLine("Введите размер файла (целое число)");
-                int size = int.Parse(Console.ReadLine());
-                MyFile file = new MyFile(name, size);
+                Console.WriteLine("путь к файлу:");
+                string path = Console.ReadLine();
+                FileInfo fileInfo = new FileInfo(path);
+                long sizeFile = fileInfo.Length;
+                string stringOffile = File.ReadAllText(path);
+                string fileName = Path.GetFileName(path);
+                DateTime timeCreatedFile = File.GetCreationTime(path);
+                /*Console.WriteLine("Введите размер файла (целое число)");
+                int size = int.Parse(Console.ReadLine());*/
+                MyFile file = new MyFile();
+                file.parsWithFile(fileName, sizeFile, timeCreatedFile);
                 Console.Clear();
-                Console.WriteLine($"Создан файл: {file.fileName} размер: {file.sizeFile} дата создания: {file.timeCreatedFile}");
+                Console.WriteLine($"Получен файл: {file.fileName} размер: {file.sizeFile} дата создания: {file.timeCreatedFile}");
                 Console.WriteLine("Переименовать? (Y - Да; Z - Нет");
+                z = Console.ReadLine();
                 if (z == "Z") 
                 {
                     Console.Clear();
@@ -44,13 +51,13 @@ namespace pis_laba_1
                 _fileName = value;
             } 
         }
-        public DateTime timeCreatedFile { get; }
-        public int sizeFile { get; }
-        public MyFile(string _fileName, int sizeFile)
+        public DateTime timeCreatedFile { get; set; }
+        public long sizeFile { get; set; }
+        public void parsWithFile(string parsFileName, long parsFileSize, DateTime parsTimeCreatedFile) 
         {
-            this._fileName = _fileName;
-            this.sizeFile = sizeFile;
-            timeCreatedFile = DateTime.Now;
+            _fileName = parsFileName;
+            sizeFile = parsFileSize;
+            timeCreatedFile = parsTimeCreatedFile;
         }
     }
 
