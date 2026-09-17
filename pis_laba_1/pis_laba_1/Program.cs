@@ -7,13 +7,12 @@ namespace pis_laba_1
     {
         static void Main(string[] args)
         {
-            bool pz = true;
-            List<MyFile> allMyFile = new List<MyFile>();
+            List<DateFile> allMyFile = new List<DateFile>();
 
             string path = "C:\\Users\\Book\\source\\repos\\-\\git_for_l1\\pis_laba_1\\pis_laba_1\\file.txt";
             foreach (string line in File.ReadLines(path))
             {
-                MyFile file = new MyFile();
+                DateFile file = new DateFile();
                 string[] parts = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
                 foreach (string part in parts)
                 {
@@ -27,18 +26,18 @@ namespace pis_laba_1
                 allMyFile.Add(file);
             }
 
-            void f(List<MyFile> allFile, DateTime from, DateTime to)
+            void f(List<DateFile> allFile, DateTime from, DateTime to)
             {
-                List<MyFile> del = new List<MyFile>();
+                List<DateFile> filesForDel = new List<DateFile>();
                 for (int i = 0; i < allFile.Count; i++)
                 {
                     if (allFile[i].timeCreatedFile >= from & allFile[i].timeCreatedFile <= to)
-                        del.Add(allFile[i]);
+                        filesForDel.Add(allFile[i]);
                 }
 
-                for (int i = 0; i < del.Count; i++)
+                for (int i = 0; i < filesForDel.Count; i++)
                 {
-                    allFile.Remove(del[i]);
+                    allFile.Remove(filesForDel[i]);
                 }
 
             }
@@ -50,7 +49,7 @@ namespace pis_laba_1
                 Console.Clear();
             }
 
-            while (pz)
+            while (true)
             {
                 Console.WriteLine("Выберите номер действия из списка");
                 Console.WriteLine("__________________________________");
@@ -91,38 +90,38 @@ namespace pis_laba_1
                         for (int i = 0; i < allMyFile.Count; i++)
                             Console.WriteLine($"{i+1}. {allMyFile[i].timeCreatedFile}");
                         Console.Write("Дата начала периода: ");
-                    WrongChose2: string choseFrom = Console.ReadLine();
+                    WrongChoseFrom: string choseFrom = Console.ReadLine();
                         if (int.TryParse(choseFrom, out int choseFromUser))
                         {
                             if (choseFromUser < 1 || choseFromUser > allMyFile.Count + 1)
                             {
                                 Console.WriteLine("такого номера нет в списке, попробуйте еще раз");
                                 Console.WriteLine();
-                                goto WrongChose2;
+                                goto WrongChoseFrom;
                             }
                         }
                         else
                         {
                             Console.WriteLine("такого номера нет в списке, попробуйте еще раз");
                             Console.WriteLine();
-                            goto WrongChose2;
+                            goto WrongChoseFrom;
                         }
                         Console.Write("Дата конца периода: ");
-                    WrongChose3: string choseTo = Console.ReadLine();
+                    WrongChoseTo: string choseTo = Console.ReadLine();
                         if (int.TryParse(choseTo, out int choseToUser))
                         {
                             if (choseToUser < 1 || choseToUser > allMyFile.Count + 1)
                             {
                                 Console.WriteLine("такого номера нет в списке");
                                 Console.WriteLine();
-                                goto WrongChose3;
+                                goto WrongChoseTo;
                             }
                         }
                         else
                         {
                             Console.WriteLine("такого номера нет в списке, попробуйте еще раз");
                             Console.WriteLine();
-                            goto WrongChose3;
+                            goto WrongChoseTo;
                         }
                         DateTime dataFrome = allMyFile[choseFromUser - 1].timeCreatedFile;
                         DateTime dataTo = allMyFile[choseToUser - 1].timeCreatedFile;
@@ -139,7 +138,7 @@ namespace pis_laba_1
     }
 
 
-    class MyFile
+    class DateFile
     {
         private string _fileName;
         public string fileName
