@@ -41,6 +41,18 @@ namespace pis_laba_1
                 }
 
             }
+
+            int quatityNumbersAmong0(int[] numbers)
+            {
+                int counterNumbersAmong0 = 0;
+                for(int i = 1; i < numbers.Length - 1; i++)
+                {
+                    if (numbers[i - 1] == 0 && numbers[i + 1] == 0)
+                        counterNumbersAmong0++;
+                }
+                return counterNumbersAmong0;
+            }
+
             void afterCase()
             {
                 Console.WriteLine();
