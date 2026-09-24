@@ -1,55 +1,37 @@
-﻿using System.Data;
-using System.Diagnostics.Tracing;
-using System.IO;
-using System.Security.Cryptography;
+﻿using System;
+using System.Collections.Generic;
+using System.Security.AccessControl;
+using System.Text;
+
 namespace pis_laba_1
 {
-    internal class Program
+    internal class UI
     {
-        static void Main(string[] args)
+        private DateFiles dateFiles;
+        public UI(DateFiles dateFiles)
         {
+            this.dateFiles = dateFiles;
+        }
 
-            string path = "C:\\Users\\Book\\source\\repos\\-\\git_for_l1\\pis_laba_1\\pis_laba_1\\file.txt";
+        public void afterCase()
+        {
+            Console.WriteLine();
+            Console.WriteLine("чтобы перейти в основное меню нажмите Enter..");
+            Console.ReadLine();
+            Console.Clear();
+        }
 
-            DateFiles dateFiles = new DateFiles();
-            FileParse fileParse = new FileParse(dateFiles);
-            UI ui = new UI(dateFiles);
-
-<<<<<<< Updated upstream
-                for (int i = 0; i < filesForDel.Count; i++)
-                {
-                    allFile.Remove(filesForDel[i]);
-                }
-
-            }
-
-            int quatityNumbersAmong0(int[] numbers)
-            {
-                int counterNumbersAmong0 = 0;
-                for(int i = 1; i < numbers.Length - 1; i++)
-                {
-                    if (numbers[i - 1] == 0 && numbers[i + 1] == 0)
-                        counterNumbersAmong0++;
-                }
-                return counterNumbersAmong0;
-            }
-
-            void afterCase()
-            {
-                Console.WriteLine();
-                Console.WriteLine("чтобы перейти в основное меню нажмите Enter..");
-                Console.ReadLine();
-                Console.Clear();
-            }
-
+        public void rendring()
+        {
             while (true)
             {
                 Console.WriteLine("Выберите номер действия из списка");
                 Console.WriteLine("__________________________________");
                 Console.WriteLine();
-                Console.WriteLine("1. Посмотреть список файлов");
+                Console.WriteLine("1. Посмотреть имеющийся список файлов");
                 Console.WriteLine("2. Удалить файлы за период");
                 Console.WriteLine("3. Завершение программы");
+
             WrongChose: string chose = Console.ReadLine();
                 int choseUser;
                 if (int.TryParse(chose, out int riteChose))
@@ -69,24 +51,34 @@ namespace pis_laba_1
                     goto WrongChose;
                 }
                 Console.Clear();
-                
+
                 switch (choseUser)
                 {
                     case 1:
-                        for (int i = 0; i < allMyFile.Count; i++)
-                            Console.WriteLine($"{i + 1}. {allMyFile[i].fileName} {allMyFile[i].sizeFile} {allMyFile[i].timeCreatedFile}");
+                        Console.Clear();
+                        Console.WriteLine($"Файлов всего: {dateFiles.allFilesForShow.Count}");
+                        for (int i = 0; i < dateFiles.allFilesForShow.Count; i++)
+                        {
+                            Console.WriteLine($"{i + 1}.");
+                            Console.WriteLine(dateFiles.allFilesForShow[i].toString());
+                            Console.WriteLine("______________________________________");
+                            Console.WriteLine();
+                        }
                         afterCase();
                         break;
 
                     case 2:
+                        Console.Clear();
                         Console.WriteLine("Выберите две даты (начало и конец периода)");
-                        for (int i = 0; i < allMyFile.Count; i++)
-                            Console.WriteLine($"{i+1}. {allMyFile[i].timeCreatedFile}");
+
+                        for (int i = 0; i < dateFiles.allFilesForShow.Count; i++)
+                            Console.WriteLine($"{i + 1}. {dateFiles.allFilesForShow[i].timeCreatedFile}");
+
                         Console.Write("Дата начала периода: ");
                     WrongChoseFrom: string choseFrom = Console.ReadLine();
                         if (int.TryParse(choseFrom, out int choseFromUser))
                         {
-                            if (choseFromUser < 1 || choseFromUser > allMyFile.Count + 1)
+                            if (choseFromUser < 1 || choseFromUser > dateFiles.allFilesForShow.Count + 1)
                             {
                                 Console.WriteLine("такого номера нет в списке, попробуйте еще раз");
                                 Console.WriteLine();
@@ -103,7 +95,7 @@ namespace pis_laba_1
                     WrongChoseTo: string choseTo = Console.ReadLine();
                         if (int.TryParse(choseTo, out int choseToUser))
                         {
-                            if (choseToUser < 1 || choseToUser > allMyFile.Count + 1)
+                            if (choseToUser < 1 || choseToUser > dateFiles.allFilesForShow.Count + 1)
                             {
                                 Console.WriteLine("такого номера нет в списке");
                                 Console.WriteLine();
@@ -116,9 +108,9 @@ namespace pis_laba_1
                             Console.WriteLine();
                             goto WrongChoseTo;
                         }
-                        DateTime dataFrome = allMyFile[choseFromUser - 1].timeCreatedFile;
-                        DateTime dataTo = allMyFile[choseToUser - 1].timeCreatedFile;
-                        f(allMyFile, dataFrome, dataTo);
+                        DateTime dataFrome = dateFiles.allFilesForShow[choseFromUser - 1].timeCreatedFile;
+                        DateTime dataTo = dateFiles.allFilesForShow[choseToUser - 1].timeCreatedFile;
+                        dateFiles.ereseRange(dataFrome, dataTo);
                         Console.WriteLine($"Файлы за период от {dataFrome} до {dataTo} удалены");
                         afterCase();
                         break;
@@ -126,13 +118,6 @@ namespace pis_laba_1
                         return;
                 }
             }
-=======
-            fileParse.parsingOfFile(path);
-            ui.rendring();
->>>>>>> Stashed changes
         }
-
     }
 }
-
-
