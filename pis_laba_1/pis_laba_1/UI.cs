@@ -32,27 +32,8 @@ namespace pis_laba_1
                 Console.WriteLine("2. Удалить файлы за период");
                 Console.WriteLine("3. Завершение программы");
 
-            WrongChose: string chose = Console.ReadLine();
-                int choseUser;
-                if (int.TryParse(chose, out int riteChose))
-                {
-                    if (riteChose < 1 || riteChose > 3)
-                    {
-                        Console.WriteLine("такого номера нет в списке, попробуйте еще раз");
-                        Console.WriteLine();
-                        goto WrongChose;
-                    }
-                    choseUser = riteChose;
-                }
-                else
-                {
-                    Console.WriteLine("такого номера нет в списке, попробуйте еще раз");
-                    Console.WriteLine();
-                    goto WrongChose;
-                }
-                Console.Clear();
 
-                switch (choseUser)
+                switch (int.Parse(Console.ReadLine()))
                 {
                     case 1:
                         Console.Clear();
@@ -75,45 +56,20 @@ namespace pis_laba_1
                             Console.WriteLine($"{i + 1}. {dateFiles.allFilesForShow[i].timeCreatedFile}");
 
                         Console.Write("Дата начала периода: ");
-                    WrongChoseFrom: string choseFrom = Console.ReadLine();
-                        if (int.TryParse(choseFrom, out int choseFromUser))
-                        {
-                            if (choseFromUser < 1 || choseFromUser > dateFiles.allFilesForShow.Count + 1)
-                            {
-                                Console.WriteLine("такого номера нет в списке, попробуйте еще раз");
-                                Console.WriteLine();
-                                goto WrongChoseFrom;
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("такого номера нет в списке, попробуйте еще раз");
-                            Console.WriteLine();
-                            goto WrongChoseFrom;
-                        }
+                        int choseFromUser = int.Parse(Console.ReadLine());
+
                         Console.Write("Дата конца периода: ");
-                    WrongChoseTo: string choseTo = Console.ReadLine();
-                        if (int.TryParse(choseTo, out int choseToUser))
-                        {
-                            if (choseToUser < 1 || choseToUser > dateFiles.allFilesForShow.Count + 1)
-                            {
-                                Console.WriteLine("такого номера нет в списке");
-                                Console.WriteLine();
-                                goto WrongChoseTo;
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("такого номера нет в списке, попробуйте еще раз");
-                            Console.WriteLine();
-                            goto WrongChoseTo;
-                        }
+                        int choseToUser = int.Parse(Console.ReadLine());
+                        
                         DateTime dataFrome = dateFiles.allFilesForShow[choseFromUser - 1].timeCreatedFile;
                         DateTime dataTo = dateFiles.allFilesForShow[choseToUser - 1].timeCreatedFile;
+                        
                         dateFiles.ereseRange(dataFrome, dataTo);
+
                         Console.WriteLine($"Файлы за период от {dataFrome} до {dataTo} удалены");
                         afterCase();
                         break;
+
                     case 3:
                         return;
                 }

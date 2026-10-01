@@ -61,7 +61,7 @@ namespace pis_laba_1
                 else
                 {
                     DateImageFile fileImage = new DateImageFile();
-                    string[] dimensions = parts[parts.Length - 1].Split('×', StringSplitOptions.RemoveEmptyEntries);
+                    string[] dimensions = parts[parts.Length - 1].Split('x', StringSplitOptions.RemoveEmptyEntries);
                     widthImage = int.Parse(dimensions[0]);
                     heightImage = int.Parse(dimensions[1]);
                     foreach (string part in parts)
@@ -70,7 +70,7 @@ namespace pis_laba_1
                             size = parsedSize;
                         else if (DateTime.TryParse(part, out DateTime parsDate))
                             time = parsDate;
-                        else
+                        else if(part != parts[parts.Length - 1])
                             name = part;
                         fileImage.parsWithImageFile(name, size, time, widthImage, heightImage);
                     }

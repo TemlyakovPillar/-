@@ -38,7 +38,7 @@ namespace pis_laba_1
         }
         public override string toString()
         {
-            return $"Имя файла: {fileName}\n Размер: {_sizeFile}\n Дата создания: {_timeCreatedFile}\n Разрешение: {widthImage}×{heightImage}";
+            return $"Имя файла: {fileName}\n Размер: {_sizeFile}\n Дата создания: {_timeCreatedFile}\n Разрешение: {widthImage}x{heightImage}";
 
         }
     }
