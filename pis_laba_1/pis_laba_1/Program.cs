@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using pis_laba_1.BL;
 using pis_laba_1.Data;
+using pis_laba_1.UI;
 
 
 namespace pis_laba_1
@@ -15,16 +16,17 @@ namespace pis_laba_1
         {
 
             string path = "C:\\Users\\Book\\source\\repos\\-\\git_for_l1\\pis_laba_1\\pis_laba_1\\file.txt";
+
             DateFiles dataGraph = new DateFiles();
+
             FileParse fileParse = new FileParse(dataGraph);
-            UI ui = new UI(dataGraph);
-
             fileParse.parsingOfFile(path);
-            ui.listParsingErrors = fileParse.sendErrorsToUi();
+
+            ConsoleUI ui = new ConsoleUI(dataGraph, fileParse.sendErrorsToUi());
 
 
 
-            while (ui.continuationSign)
+            while (ui.appContinue.continuationSign)
             {
                 try
                 {

@@ -37,6 +37,19 @@
         "runtime": {
           "bin/placeholder/Parser.dll": {}
         }
+      },
+      "UI/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Data": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/UI.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/UI.dll": {}
+        }
       }
     }
   },
@@ -55,12 +68,18 @@
       "type": "project",
       "path": "../BL/Parser.csproj",
       "msbuildProject": "../BL/Parser.csproj"
+    },
+    "UI/1.0.0": {
+      "type": "project",
+      "path": "../UI/UI.csproj",
+      "msbuildProject": "../UI/UI.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
       "Data >= 1.0.0",
-      "Parser >= 1.0.0"
+      "Parser >= 1.0.0",
+      "UI >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -101,6 +120,9 @@
             },
             "C:\\Users\\Book\\source\\repos\\-\\git_for_l1\\pis_laba_1\\Data\\Data.csproj": {
               "projectPath": "C:\\Users\\Book\\source\\repos\\-\\git_for_l1\\pis_laba_1\\Data\\Data.csproj"
+            },
+            "C:\\Users\\Book\\source\\repos\\-\\git_for_l1\\pis_laba_1\\UI\\UI.csproj": {
+              "projectPath": "C:\\Users\\Book\\source\\repos\\-\\git_for_l1\\pis_laba_1\\UI\\UI.csproj"
             }
           }
         }

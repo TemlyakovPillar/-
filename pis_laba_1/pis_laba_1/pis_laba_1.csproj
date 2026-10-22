@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BL\Parser.csproj" />
     <ProjectReference Include="..\Data\Data.csproj" />
+    <ProjectReference Include="..\UI\UI.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,4 +4,5 @@
   <Project Path="Model/Model.csproj" Id="5bae2637-26be-4993-bffb-c1aa19c51bef" />
   <Project Path="ModulesTests/ModulesTests.csproj" Id="113101c1-d777-4668-b5c7-2ab166705abd" />
   <Project Path="pis_laba_1/pis_laba_1.csproj" />
+  <Project Path="UI/UI.csproj" Id="761897a2-9863-4285-9e91-3a3cbe1c8aee" />
 </Solution>
