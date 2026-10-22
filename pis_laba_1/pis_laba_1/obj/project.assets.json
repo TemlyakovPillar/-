@@ -1,11 +1,67 @@
 {
   "version": 4,
   "targets": {
-    "net10.0": {}
+    "net10.0": {
+      "Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Model": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Data.dll": {}
+        }
+      },
+      "Model/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Model.dll": {}
+        }
+      },
+      "Parser/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Data": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Parser.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Parser.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Data/1.0.0": {
+      "type": "project",
+      "path": "../Data/Data.csproj",
+      "msbuildProject": "../Data/Data.csproj"
+    },
+    "Model/1.0.0": {
+      "type": "project",
+      "path": "../Model/Model.csproj",
+      "msbuildProject": "../Model/Model.csproj"
+    },
+    "Parser/1.0.0": {
+      "type": "project",
+      "path": "../BL/Parser.csproj",
+      "msbuildProject": "../BL/Parser.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net10.0": []
+    "net10.0": [
+      "Data >= 1.0.0",
+      "Parser >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Book\\.nuget\\packages\\": {},
@@ -39,7 +95,14 @@
         "net10.0": {
           "framework": "net10.0",
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Book\\source\\repos\\-\\git_for_l1\\pis_laba_1\\BL\\Parser.csproj": {
+              "projectPath": "C:\\Users\\Book\\source\\repos\\-\\git_for_l1\\pis_laba_1\\BL\\Parser.csproj"
+            },
+            "C:\\Users\\Book\\source\\repos\\-\\git_for_l1\\pis_laba_1\\Data\\Data.csproj": {
+              "projectPath": "C:\\Users\\Book\\source\\repos\\-\\git_for_l1\\pis_laba_1\\Data\\Data.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -3,9 +3,13 @@ using System.Diagnostics.Tracing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
+using pis_laba_1.BL;
+using pis_laba_1.Data;
+
+
 namespace pis_laba_1
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -14,11 +18,16 @@ namespace pis_laba_1
             DateFiles dataGraph = new DateFiles();
             FileParse fileParse = new FileParse(dataGraph);
             UI ui = new UI(dataGraph);
-            while (true)
+
+            fileParse.parsingOfFile(path);
+            ui.listParsingErrors = fileParse.sendErrorsToUi();
+
+
+
+            while (ui.continuationSign)
             {
                 try
                 {
-                    fileParse.parsingOfFile(path);
                     ui.rendring();
                 }
                 catch (Exception ex)

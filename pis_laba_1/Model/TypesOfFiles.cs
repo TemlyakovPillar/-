@@ -4,7 +4,7 @@ using System.Text;
 
 namespace pis_laba_1
 {
-    class DateFile
+    public class DateFile
     {
         public string fileName = "";
         protected DateTime _timeCreatedFile;
@@ -23,12 +23,12 @@ namespace pis_laba_1
             return $"Имя файла: {fileName}\n Размер: {_sizeFile}\n Дата создания: {_timeCreatedFile}";
         }
     }
-    class DateImageFile : DateFile
+    public class DateImageFile : DateFile
     {
 
-        private int widthImage { get; set; }
+        public int widthImage { get; set; }
 
-        private int heightImage { get; set; }
+        public int heightImage { get; set; }
 
         public void parsWithImageFile(string parsFileName, int parsFileSize, DateTime parsTimeCreatedFile, int pathWidthImage, int pathHeightImage)
         {
@@ -43,9 +43,9 @@ namespace pis_laba_1
         }
     }
 
-    class DateVideoFile : DateFile
+    public class DateVideoFile : DateFile
     {
-        private int fps { get; set; }
+        public int fps { get; set; }
 
         public void parsWihtVideoFile(string parsFileName, int parsFileSize, DateTime parsTimeCreatedFile, int parsFps)
         {

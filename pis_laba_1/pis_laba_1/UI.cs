@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Security.AccessControl;
 using System.Text;
+using pis_laba_1.Data;
 
 namespace pis_laba_1
 {
-    internal class UI
+    public class UI
     {
-        DateFiles dateFiles;
+        private readonly DateFiles _dateFiles;
         public UI(DateFiles dateFiles)
         {
-            this.dateFiles = dateFiles;
+            _dateFiles = dateFiles;
         }
+
+        public bool continuationSign = true;
+        public List<string> listParsingErrors = new List<string>();
 
         private void afterCase()
         {
@@ -26,35 +30,31 @@ namespace pis_laba_1
             Console.Clear();
             Console.WriteLine("Выберите две даты (начало и конец периода)");
 
-            for (int i = 0; i < dateFiles.allFilesForShow.Count; i++)
-                Console.WriteLine($"{i + 1}. {dateFiles.allFilesForShow[i].timeCreatedFile}");
-            while (true)
+            for (int i = 0; i < _dateFiles.allFilesForShow.Count; i++)
+                Console.WriteLine($"{i + 1}. {_dateFiles.allFilesForShow[i].timeCreatedFile}");
+            try
             {
-                try
-                {
-                    Console.Write("Дата начала периода: ");
-                    int choseFromUser = int.Parse(Console.ReadLine());
-                    if (choseFromUser > dateFiles.allFilesForShow.Count)
-                        throw new IOException("В списке нет такой позиции. Попробуйте ещё раз");
+                Console.Write("Дата начала периода: ");
+                int choseFromUser = int.Parse(Console.ReadLine());
+                if (choseFromUser > _dateFiles.allFilesForShow.Count)
+                    throw new IOException("В списке нет такой позиции. Попробуйте ещё раз");
 
-                    Console.Write("Дата конца периода: ");
-                    int choseToUser = int.Parse(Console.ReadLine());
-                    if (choseToUser > dateFiles.allFilesForShow.Count)
-                        throw new IOException("В списке нет такой позиции. Попробуйте ещё раз");
+                Console.Write("Дата конца периода: ");
+                int choseToUser = int.Parse(Console.ReadLine());
+                if (choseToUser > _dateFiles.allFilesForShow.Count)
+                    throw new IOException("В списке нет такой позиции. Попробуйте ещё раз");
 
-                    DateTime dataFrome = dateFiles.allFilesForShow[choseFromUser - 1].timeCreatedFile;
-                    DateTime dataTo = dateFiles.allFilesForShow[choseToUser - 1].timeCreatedFile;
+                DateTime dataFrome = _dateFiles.allFilesForShow[choseFromUser - 1].timeCreatedFile;
+                DateTime dataTo = _dateFiles.allFilesForShow[choseToUser - 1].timeCreatedFile;
 
-                    dateFiles.ereseRange(dataFrome, dataTo);
+                _dateFiles.ereseRange(dataFrome, dataTo);
 
-                    Console.WriteLine($"Файлы за период от {dataFrome} до {dataTo} удалены");
-                    afterCase();
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Ошибка при выборе даты", ex);
-                }
-
+                Console.WriteLine($"Файлы за период от {dataFrome} до {dataTo} удалены");
+                afterCase();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ошибка при выборе даты", ex);
             }
         }
 
@@ -63,12 +63,17 @@ namespace pis_laba_1
             if (ex.InnerException != null)
                 Console.WriteLine($"{ex.Message}. {ex.InnerException.Message}");
             else
-                Console.WriteLine($"{ex.Message}");
+                Console.WriteLine(ex.Message);
+        }
+        public void printParsingErrors()
+        {
+            foreach (string error in listParsingErrors)
+                Console.WriteLine(error);
         }
 
         public void rendring()
         {
-            while (true)
+            while (continuationSign)
             {
                 Console.WriteLine("Выберите номер действия из списка");
                 Console.WriteLine("__________________________________");
@@ -83,14 +88,15 @@ namespace pis_laba_1
                     {
                         case 1:
                             Console.Clear();
-                            Console.WriteLine($"Файлов всего: {dateFiles.allFilesForShow.Count}");
-                            for (int i = 0; i < dateFiles.allFilesForShow.Count; i++)
+                            Console.WriteLine($"Файлов всего: {_dateFiles.allFilesForShow.Count}");
+                            for (int i = 0; i < _dateFiles.allFilesForShow.Count; i++)
                             {
                                 Console.WriteLine($"{i + 1}.");
-                                Console.WriteLine(dateFiles.allFilesForShow[i].toString());
+                                Console.WriteLine(_dateFiles.allFilesForShow[i].toString());
                                 Console.WriteLine("______________________________________");
                                 Console.WriteLine();
                             }
+                            printParsingErrors();
                             afterCase();
                             break;
 
@@ -99,7 +105,8 @@ namespace pis_laba_1
                             break;
 
                         case 3:
-                            return;
+                            continuationSign = false;
+                            break;
                     }
                 }
                 catch (FormatException ex)

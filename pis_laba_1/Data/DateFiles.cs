@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace pis_laba_1
+namespace pis_laba_1.Data
 {
-    internal class DateFiles
+    public class DateFiles
     {
         private List<DateFile> allFiles = new List<DateFile>();
 

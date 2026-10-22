@@ -1,3 +1,7 @@
 <Solution>
+  <Project Path="BL/Parser.csproj" Id="f4499bed-7227-424a-b058-bfea80eef028" />
+  <Project Path="Data/Data.csproj" Id="42d262bd-2086-4203-bf26-53f2d32f114a" />
+  <Project Path="Model/Model.csproj" Id="5bae2637-26be-4993-bffb-c1aa19c51bef" />
+  <Project Path="ModulesTests/ModulesTests.csproj" Id="113101c1-d777-4668-b5c7-2ab166705abd" />
   <Project Path="pis_laba_1/pis_laba_1.csproj" />
 </Solution>
