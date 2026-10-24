@@ -28,8 +28,8 @@ namespace UI
         }
         public override void Select()
         {
-            Utilites.PrintListFiles(_dateFiles.allFilesForShow);
-            Utilites.PrintParsingErrors(_listParsingErrors);
+            _dateFiles.allFilesForShow.PrintListFiles();
+            _listParsingErrors.PrintParsingErrors();
             Utilites.afterCase();
         }
     }

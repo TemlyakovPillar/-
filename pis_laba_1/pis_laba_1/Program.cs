@@ -24,7 +24,7 @@ namespace pis_laba_1
 
             ConsoleUI ui = new ConsoleUI(dataGraph, fileParse.sendErrorsToUi());
 
-
+            ui.Run();
 
             while (ui.appContinue.continuationSign)
             {

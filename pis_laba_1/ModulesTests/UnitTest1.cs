@@ -1,11 +1,80 @@
 ﻿using pis_laba_1;
 using pis_laba_1.BL;
 using pis_laba_1.Data;
+using pis_laba_1.UI;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using UI;
 
 namespace ModulesTests
 {
+    public class UtilitesTests
+    {
+        private DateFiles CreateMockDateFiles()
+        {
+            var dateFiles = new DateFiles();
+
+            var file1 = new DateFile();
+            var file2 = new DateFile();
+            var file3 = new DateFile();
+
+            file1.parsWithFile("file1.txt", 100, new DateTime(2026, 10, 1));
+            file2.parsWithFile("file2.txt", 200, new DateTime(2026, 10, 15));
+            file3.parsWithFile("file3.txt", 300, new DateTime(2026, 10, 30));
+
+            dateFiles.addFileToDB(file1);
+            dateFiles.addFileToDB(file2);
+            dateFiles.addFileToDB(file3);
+
+            return dateFiles;
+        }
+
+        [Fact]
+        public void DeterminationOfRemovalPeriod_ValidInput_ReturnsCorrectDates()
+        {
+            var dateFiles = CreateMockDateFiles();
+
+            string simulatedInput = $"1{Environment.NewLine}3{Environment.NewLine}";
+            using var stringReader = new StringReader(simulatedInput);
+            Console.SetIn(stringReader);
+
+            var result = Utilites.DeterminationOfRemovalPeriod(dateFiles);
+
+            Assert.NotNull(result);
+            Assert.Equal(new DateTime(2026, 10, 1), result["From"]);
+            Assert.Equal(new DateTime(2026, 10, 30), result["To"]);
+        }
+
+        [Theory]
+        [InlineData("99", "2")] 
+        [InlineData("2", "99")]   
+        [InlineData("-5", "2")]  
+        public void DeterminationOfRemovalPeriod_OutofRangeInput_ThrowsIOException(string badFrom, string badTo)
+        {
+            var dateFiles = CreateMockDateFiles();
+            Console.SetIn(new StringReader($"{badFrom}{Environment.NewLine}{badTo}{Environment.NewLine}"));
+
+            var exception = Assert.Throws<IOException>(() => Utilites.DeterminationOfRemovalPeriod(dateFiles));
+
+            Assert.Equal("В списке нет такой позиции. Попробуйте ещё раз", exception.Message);
+        }
+
+        [Theory]
+        [InlineData("abc", "2")] 
+        [InlineData("", "2")]
+        [InlineData("", "abc")]
+        public void DeterminationOfRemovalPeriod_NonNumericInput_ThrowsWrappedException(string badFrom, string badTo)
+        {
+            var dateFiles = CreateMockDateFiles();
+            Console.SetIn(new StringReader($"{badFrom}{Environment.NewLine}{badTo}{Environment.NewLine}"));
+
+            var exception = Assert.Throws<Exception>(() => Utilites.DeterminationOfRemovalPeriod(dateFiles));
+
+            Assert.Equal("Ошибка при выборе даты", exception.Message);
+        }
+
+
+    }
     public class FileParseTests: IDisposable
     {
         private readonly string _testFilePath;

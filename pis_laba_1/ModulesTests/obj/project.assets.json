@@ -429,6 +429,19 @@
         "runtime": {
           "bin/placeholder/Parser.dll": {}
         }
+      },
+      "UI/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Data": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/UI.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/UI.dll": {}
+        }
       }
     }
   },
@@ -954,6 +967,11 @@
       "type": "project",
       "path": "../BL/Parser.csproj",
       "msbuildProject": "../BL/Parser.csproj"
+    },
+    "UI/1.0.0": {
+      "type": "project",
+      "path": "../UI/UI.csproj",
+      "msbuildProject": "../UI/UI.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -961,6 +979,7 @@
       "Data >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 17.14.1",
       "Parser >= 1.0.0",
+      "UI >= 1.0.0",
       "coverlet.collector >= 6.0.4",
       "xunit >= 2.9.3",
       "xunit.runner.visualstudio >= 3.1.4"
@@ -1004,6 +1023,9 @@
             },
             "C:\\Users\\Book\\source\\repos\\-\\git_for_l1\\pis_laba_1\\Data\\Data.csproj": {
               "projectPath": "C:\\Users\\Book\\source\\repos\\-\\git_for_l1\\pis_laba_1\\Data\\Data.csproj"
+            },
+            "C:\\Users\\Book\\source\\repos\\-\\git_for_l1\\pis_laba_1\\UI\\UI.csproj": {
+              "projectPath": "C:\\Users\\Book\\source\\repos\\-\\git_for_l1\\pis_laba_1\\UI\\UI.csproj"
             }
           }
         }

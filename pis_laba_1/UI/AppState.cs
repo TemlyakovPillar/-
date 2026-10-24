@@ -6,6 +6,6 @@ namespace UI
 {
     public class AppState
     {
-        public bool continuationSign { get; set; } = true;
+        public bool continuationSign { get; set; }
     }
 }

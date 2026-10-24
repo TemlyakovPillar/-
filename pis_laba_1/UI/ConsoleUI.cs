@@ -25,6 +25,11 @@ namespace pis_laba_1.UI
                 Console.WriteLine(ex.Message);
         }
 
+        public void Run()
+        {
+            appContinue.continuationSign = true;
+        }
+
         public void rendring()
         {
             try
